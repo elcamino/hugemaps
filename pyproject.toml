@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hugemaps"
+version = "0.1.0"
+description = "Generate large printable wall-sized city maps from OpenStreetMap data in the Thomas Bros style"
+requires-python = ">=3.10"
+dependencies = [
+    "osmnx>=2.0.0",
+    "geopandas>=1.0.0",
+    "shapely>=2.0",
+    "matplotlib>=3.8",
+    "numpy",
+    "click>=8.0",
+    "rtree>=1.0",
+    "pyproj>=3.0",
+]
+
+[project.scripts]
+hugemaps = "hugemaps.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hugemaps*"]
