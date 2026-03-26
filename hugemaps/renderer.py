@@ -83,7 +83,7 @@ def render_water(ax: Axes, water_gdf: gpd.GeoDataFrame, style: Style) -> None:
             patches,
             facecolor=style.water_color,
             edgecolor=style.water_edge_color,
-            linewidth=0.3,
+            linewidth=0.8,
             alpha=style.water_alpha,
             zorder=1,
         )
@@ -93,7 +93,7 @@ def render_water(ax: Axes, water_gdf: gpd.GeoDataFrame, style: Style) -> None:
         lc = LineCollection(
             lines,
             colors=style.water_color,
-            linewidths=1.0,
+            linewidths=1.5,
             alpha=style.water_alpha,
             zorder=1,
         )
@@ -117,7 +117,7 @@ def render_parks(ax: Axes, parks_gdf: gpd.GeoDataFrame, style: Style) -> None:
             patches,
             facecolor=style.park_color,
             edgecolor=style.park_edge_color,
-            linewidth=0.3,
+            linewidth=0.8,
             alpha=style.park_alpha,
             zorder=1,
         )
@@ -303,10 +303,10 @@ def render_map(
     map_ax.set_xticks([])
     map_ax.set_yticks([])
 
-    # Subtle border around map area
+    # Bold border around map area
     for spine in map_ax.spines.values():
-        spine.set_edgecolor("#999999")
-        spine.set_linewidth(0.8)
+        spine.set_edgecolor("#2C3E50")
+        spine.set_linewidth(2.0)
 
     # Render layers back-to-front
     render_water(map_ax, city_data.get("water", gpd.GeoDataFrame()), style)

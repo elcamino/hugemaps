@@ -33,7 +33,7 @@ def draw_grid(
     col_width = width / cols
     row_height = height / rows
 
-    # Grid lines
+    # Grid lines — solid thin lines (Thomas Bros style)
     for i in range(1, cols):
         x = minx + i * col_width
         ax.axvline(
@@ -42,7 +42,6 @@ def draw_grid(
             linewidth=style.grid_line_width,
             alpha=style.grid_line_alpha,
             zorder=40,
-            linestyle="--",
         )
 
     for i in range(1, rows):
@@ -53,7 +52,24 @@ def draw_grid(
             linewidth=style.grid_line_width,
             alpha=style.grid_line_alpha,
             zorder=40,
-            linestyle="--",
+        )
+
+    # Draw border around the full grid (solid, slightly thicker)
+    for side_x in [minx, maxx]:
+        ax.axvline(
+            side_x,
+            color=style.grid_line_color,
+            linewidth=style.grid_line_width * 2,
+            alpha=style.grid_line_alpha * 1.5,
+            zorder=40,
+        )
+    for side_y in [miny, maxy]:
+        ax.axhline(
+            side_y,
+            color=style.grid_line_color,
+            linewidth=style.grid_line_width * 2,
+            alpha=style.grid_line_alpha * 1.5,
+            zorder=40,
         )
 
     # Column labels (A, B, C, ...) along top and bottom

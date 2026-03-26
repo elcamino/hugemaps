@@ -303,8 +303,9 @@ class LabelPlacer:
                 s.length for s in segments if hasattr(s, "length")
             )
 
-            # Repeat every ~800m of road length (scaled to map)
-            repeat_interval_m = 800
+            # Repeat every ~2000m of road length — enough to see it in each
+            # grid cell but not so much that it clutters
+            repeat_interval_m = 2000
             num_repeats = int(total_length / repeat_interval_m) - 1
 
             if num_repeats <= 0:
@@ -313,7 +314,7 @@ class LabelPlacer:
             # Merge all segments and sample positions
             all_positions = []
             for seg in segments:
-                if not hasattr(seg, "length") or seg.length < 100:
+                if not hasattr(seg, "length") or seg.length < 300:
                     continue
                 n_samples = max(1, int(seg.length / repeat_interval_m))
                 for i in range(n_samples):
@@ -322,7 +323,7 @@ class LabelPlacer:
                     if pos:
                         all_positions.append(pos)
 
-            for x, y, angle in all_positions[:num_repeats]:
+            for x, y, angle in all_positions[:min(num_repeats, 5)]:
                 bbox = self._estimate_bbox(
                     x, y, name, rs.label_size, angle, meters_per_pt
                 )
